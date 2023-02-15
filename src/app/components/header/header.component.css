@@ -1,0 +1,16 @@
+mat-sidenav-container{
+    height: 100%;
+}
+
+mat-sidenav, mat-sidenav-content{
+    padding: 16px;
+}
+
+mat-sidenav{
+/*background-color: azure;*/
+width: 200px;
+}
+
+.example-spacer{
+    flex: 1 1 auto;
+}

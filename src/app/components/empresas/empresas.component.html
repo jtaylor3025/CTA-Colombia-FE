@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Empresas</mat-card-title>
+    <mat-card-subtitle>Listado de empresas inscritas</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="empresa" class="mat-elevation-z8">
+      <ng-container matColumnDef="nit">
+        <th mat-header-cell *matColumnDef>NIT</th>
+        <td mat-cell *matCellDef="let empresa of empresas">
+          {{ empresa.nit }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matColumnDef>Nombre</th>
+        <td mat-cell *matCellDef="let empresa of empresas">
+          {{ empresa.nombre }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="representante">
+        <th mat-header-cell *matColumnDef>Representante Legal</th>
+        <td mat-cell *matCellDef="let empresa of empresas">
+          {{ empresa.representante }}
+        </td>
+      </ng-container>
+    </table>
+  </mat-card-content>
+</mat-card>

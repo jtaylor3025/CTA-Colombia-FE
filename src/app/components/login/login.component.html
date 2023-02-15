@@ -1,0 +1,56 @@
+<main class="mat-typography">
+  <div class="menu-panel">
+    <div class="panel-img">
+      <div class="logo-container">
+        <img
+          class="img-fluid"
+          src="../../../../assets/img/ctatransparente.png"
+          alt=""
+        />
+        <h1></h1>
+      </div>
+    </div>
+    <div class="panel-inputs">
+      <div style="text-align: center">
+        <div class="input-logo-container">
+          <img class="img-fluid" src="../../../assets/img/logo360.png" alt="" />
+          <h1>
+            <br />
+            Bienvenido !
+          </h1>
+        </div>
+        <p class="title-menu">Ingresa tu usuario y contraseña</p>
+      </div>
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="iniciarSesion()"
+        style="display: grid; font-size: 12px"
+      >
+        <mat-form-field color="primary" appearance="standard">
+          <mat-label>Usuario</mat-label>
+          <input formControlName="usuario" matInput />
+        </mat-form-field>
+
+        <mat-form-field color="primary" appearance="standard">
+          <mat-label>Contraseña</mat-label>
+          <input
+            formControlName="contraseña"
+            matInput
+            [type]="hide ? 'password' : 'text'"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary">Ingresar</button>
+      </form>
+    </div>
+  </div>
+</main>

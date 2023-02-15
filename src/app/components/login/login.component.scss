@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,400&family=Roboto:ital,wght@0,300;0,900;1,300&display=swap");
+//.mat-form-field-appearance-outline .mat-form-field-outline-thick {
+//    color: #f44336;
+//}
+main {
+    display: grid;
+    background-color: #eeeeee;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+}
+
+.menu-panel {
+    display: grid;
+    grid-template-columns: 32em 21em;
+    grid-auto-rows: 35em;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
+}
+
+.panel-img {
+    background-image: url(../../../assets/img/login-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: black;
+    text-align: center;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.logo-container {
+    //display: grid;
+    //grid-template-columns: 5em auto;
+    justify-content: center;
+    align-items: center;
+    margin-top: 9em;
+}
+
+.logo-container h1 {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    font-weight: 400;
+    font-style: italic;
+    font-size: xx-large;
+}
+
+.logo-container p {
+    grid-column: 2;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+}
+
+.panel-inputs {
+    background: white;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    align-content: start;
+    padding-top: 4em;
+    gap: 12px;
+    border-radius: 5px 5px 5px 0px;
+}
+
+.input-logo-container {
+    display: grid;
+    text-align: center;
+}
+
+.input-logo-container img {
+    height: 7em;
+    margin: auto;
+}
+
+.input-logo-container h1 {
+    font-family: "Roboto", sans-serif;
+    color: #9b9696;
+    font-weight: 500;
+    margin: -19px auto 5px auto;
+}
+
+.title-menu {
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    color: #9b9696;
+    font-size: 1.1rem;
+}

@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$my-primary-color:(
+    200 : #DF8381,
+    500 : #BF0603,
+    700 : #B10402,
+    contrast: (
+        200 : #000000,
+        500 : #ffffff,
+        700 : #ffffff,
+    )
+);
+    
+$my-accent-color: (
+    200 : #808a93,
+    500 : #001427,
+    700 : #000e1d,
+    contrast:(
+        200 : #000000,
+        500 : #ffffff,
+        700 : #ffffff,
+    )
+);
+
+$my-warn-color: (
+    200 : #b38080,
+    500 : #660000,
+    700 : #530000,
+    contrast:(
+        200 : #000000,
+        500 : #ffffff,
+        700 : #ffffff,
+    )
+);
+
+$my-palette-primary: mat-palette($my-primary-color);
+$my-palette-accent: mat-palette($my-accent-color);
+$my-palette-warn: mat-palette($my-warn-color);
+
+$my-theme: mat-light-theme((
+ color: (
+   primary: $my-palette-primary,
+   accent: $my-palette-accent,
+   warn: $my-palette-warn
+ )
+));
+
+@include angular-material-theme($my-theme);
