@@ -1,5 +1,5 @@
 export class Empresa {
-  emrpesaNit: string = '';
+  empresaNit: string = '';
   empresaNombre: string = '';
   empresaRepresentante: string = '';
 }

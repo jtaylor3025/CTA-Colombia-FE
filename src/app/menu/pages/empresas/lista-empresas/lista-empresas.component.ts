@@ -5,6 +5,10 @@ import { Pageable } from 'src/app/core/models/pageable.model';
 import { Empresa } from '../core/models/main.model';
 import { EmpresasHttpService } from '../services/http/empresas-http.service';
 import { merge, startWith, switchMap, map, takeUntil, Subject } from 'rxjs';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CrearEmpresaComponent } from '../crear-empresa/crear-empresa.component';
+import { AdministrarEmpresaComponent } from '../administrar-empresa/administrar-empresa.component';
+import { adminPopUpType } from '../core/types/main.type';
 
 @Component({
   selector: 'app-lista-empresas',
@@ -18,13 +22,16 @@ export class ListaEmpresasComponent implements AfterViewInit, OnDestroy {
 
   // @ViewChild(MatSort) private sort!: MatSort;
 
-  public columnas = ['nit', 'nombre', 'representante'];
+  public columnas = ['nit', 'nombre', 'representante', 'edit'];
 
   public empresas: Empresa[] = [];
 
   public totalResultados: number = 0;
 
-  constructor(private readonly _empresaHttpService: EmpresasHttpService) {}
+  constructor(
+    private readonly _empresaHttpService: EmpresasHttpService,
+    private readonly _dialog: MatDialog
+  ) {}
 
   ngAfterViewInit(): void {
     // this.sort.sortChange
@@ -59,5 +66,11 @@ export class ListaEmpresasComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this._clearSubscriptions$.next();
+  }
+
+  administrarEmpresa(tipo: adminPopUpType, empresaNit?: string) {
+    this._dialog.open(AdministrarEmpresaComponent, {
+      data: { tipo, campo: empresaNit },
+    });
   }
 }

@@ -1,23 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
-import { FloatLabelType } from '@angular/material/form-field';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Empresa } from '../core/models/main.model';
+import { EmpresasHttpService } from '../services/http/empresas-http.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-empresa',
   templateUrl: './crear-empresa.component.html',
   styleUrls: ['./crear-empresa.component.scss'],
 })
-export class CrearEmpresaComponent {
-  hideRequiredControl = new FormControl(false);
-  floatLabelControl = new FormControl('auto' as FloatLabelType);
-  options = this._formBuilder.group({
-    hideRequired: this.hideRequiredControl,
-    floatLabel: this.floatLabelControl,
-  });
+export class CrearEmpresaComponent implements OnInit {
+  public readonly empresaForm: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private EmpresasHttpService: EmpresasHttpService,
+    private router: Router,
+    formBuilder: FormBuilder
+  ) {
+    this.empresaForm = formBuilder.group({
+      empresaNit: ['', Validators.required],
+      empresaNombre: ['', Validators.required],
+      empresaRepresentante: ['', Validators.required],
+    });
+  }
 
-  getFloatLabelValue(): FloatLabelType {
-    return this.floatLabelControl.value || 'auto';
+  ngOnInit(): void {}
+
+  public createEmpresa(): void {
+    const { invalid, value } = this.empresaForm;
+
+    if (invalid) {
+      Swal.fire(
+        'Porfavor espere',
+        `Existen campos que no son validos`,
+        'warning'
+      );
+      return;
+    }
+
+    this.EmpresasHttpService.administrarEmpresa(value).subscribe((empresa) => {
+      this.router.navigate(['/lista-empresas']);
+      Swal.fire(
+        'Nueva empresa!',
+        `Empresa ${empresa.empresaNombre} creada con exito`,
+        'success'
+      );
+    });
   }
 }

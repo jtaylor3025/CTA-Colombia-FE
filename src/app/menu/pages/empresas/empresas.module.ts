@@ -7,18 +7,23 @@ import { MaterialAngularModule } from 'src/app/material-angular.module';
 import { HttpClientModule } from '@angular/common/http';
 import { EmpresasHttpService } from './services/http/empresas-http.service';
 import { CrearEmpresaComponent } from './crear-empresa/crear-empresa.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdministrarEmpresaComponent } from './administrar-empresa/administrar-empresa.component';
 
 @NgModule({
   declarations: [
     ListaEmpresasComponent,
     EditarEmpresaComponent,
     CrearEmpresaComponent,
+    AdministrarEmpresaComponent,
   ],
   imports: [
     CommonModule,
     EmpresasRoutingModule,
     MaterialAngularModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [EmpresasHttpService],
 })

@@ -60,7 +60,7 @@
         [disabled]="empresaForm.invalid"
         color="primary"
       >
-        GUARDAR
+        {{ this.data.tipo == "crear" ? "GUARDAR" : "ACTUALIZAR" }}
       </button>
       <button
         mat-dialog-close
