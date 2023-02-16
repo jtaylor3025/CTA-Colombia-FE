@@ -1,18 +1,43 @@
 mat-sidenav-container{
-    height: calc(100% - 65px);
+    height: calc(100% - 64px);
 }
 
 mat-sidenav,
 mat-sidenav-content {
-  padding: 16px;
+  padding: 10px;
 }
 
 mat-sidenav {
-  background-color: maroon;
-  width: 10%;
+  //background-color: rgba(128, 0, 0, 0.664);
+  //background-image: url(../../assets/img/login-background.jpg);
+  width: 200px;
+  background-image: radial-gradient(
+      circle,
+      rgb(242 242 242 / 84%) 35%,
+      rgb(255 255 255) 100%
+    ),
+    url(../../assets/img/login-background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
 }
 
 .example-spacer {
   flex: 1 1 auto;
 }
 
+
+mat-list-item{
+  background-color: white !important;
+  margin-top: 5px;  
+  border-radius: 10px;
+}
+
+.item-menu-active{
+  color: white;
+  background: #bf0603 !important;
+}

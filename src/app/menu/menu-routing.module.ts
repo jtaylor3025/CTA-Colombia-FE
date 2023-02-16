@@ -10,6 +10,12 @@ const routes: Routes = [
       import('./pages/empresas/empresas.module').then((m) => m.EmpresasModule),
   },
   { path: '', pathMatch: 'full', redirectTo: 'empresas' },
+  {
+    path: 'arl',
+    component: MenuComponent,
+    loadChildren: () =>
+      import('./pages/arl/arl.module').then((m) => m.ArlModule),
+  },
 ];
 
 @NgModule({
