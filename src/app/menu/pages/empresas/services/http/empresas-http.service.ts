@@ -24,7 +24,7 @@ export class EmpresasHttpService {
       .pipe(tap(console.log));
   }
 
-  administrarEmpresa(empresa: Empresa): Observable<Empresa> {
+  crearEmpresa(empresa: Empresa): Observable<Empresa> {
     return this._http.post(`${environment.api}/empresa`, empresa).pipe(
       map((response: any) => response.empresa as Empresa),
       catchError((e) => {
@@ -38,6 +38,24 @@ export class EmpresasHttpService {
         return throwError(e);
       })
     );
+  }
+
+  administrarEmpresa(empresa: Empresa): Observable<Empresa> {
+    return this._http
+      .post(`${environment.api}/empresa/actualizar`, empresa)
+      .pipe(
+        map((response: any) => response.empresa as Empresa),
+        catchError((e) => {
+          if (e.status) {
+            return throwError(e);
+          }
+
+          if (e.error.mensaje) {
+            console.error(e.error.mensaje);
+          }
+          return throwError(e);
+        })
+      );
   }
 
   /*

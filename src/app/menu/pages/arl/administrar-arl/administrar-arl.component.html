@@ -4,22 +4,18 @@
     {{ subtitulo }}
   </mat-card-subtitle>
 
-  <form
-    class="crear-empresa"
-    [formGroup]="empresaForm"
-    (ngSubmit)="createEmpresa()"
-  >
+  <form class="crear-arl" [formGroup]="arlForm">
     <section class="crear-empresa__campos">
       <mat-form-field appearance="fill">
-        <mat-label>NIT de empresa</mat-label>
+        <mat-label>Identificador de ARL</mat-label>
         <input
-          formControlName="empresaNit"
+          formControlName="arlId"
           matInput
-          placeholder="Ingrese NIT"
+          placeholder="Identificador de ARL"
           type="text"
         />
         <mat-icon matSuffix>account_balance_wallet</mat-icon>
-        <mat-error *ngIf="empresaForm.get('empresaNit')!.invalid">
+        <mat-error *ngIf="arlForm.get('arlId')!.invalid">
           Este campo no puede estar vacio
         </mat-error>
       </mat-form-field>
@@ -27,27 +23,13 @@
       <mat-form-field appearance="fill">
         <mat-label>Nombre de empresa</mat-label>
         <input
-          formControlName="empresaNombre"
+          formControlName="arlNombre"
           matInput
-          placeholder="Ingrese Nombre de empresa"
+          placeholder="Ingrese Nombre de la ARL"
           type="text"
         />
         <mat-icon matSuffix>account_balance</mat-icon>
-        <mat-error *ngIf="empresaForm.get('empresaNombre')!.invalid">
-          Este campo no puede estar vacio
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Representante legal</mat-label>
-        <input
-          formControlName="empresaRepresentante"
-          matInput
-          placeholder="Ingrese Representante"
-          type="text"
-        />
-        <mat-icon matSuffix>assignment_ind</mat-icon>
-        <mat-error *ngIf="empresaForm.get('empresaRepresentante')!.invalid">
+        <mat-error *ngIf="arlForm.get('arlNombre')!.invalid">
           Este campo no puede estar vacio
         </mat-error>
       </mat-form-field>
@@ -57,7 +39,7 @@
       <button
         type="submit"
         mat-raised-button
-        [disabled]="empresaForm.invalid"
+        [disabled]="arlForm.invalid"
         color="primary"
       >
         {{ this.data.tipo == "crear" ? "GUARDAR" : "ACTUALIZAR" }}

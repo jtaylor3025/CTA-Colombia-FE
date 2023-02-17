@@ -32,9 +32,17 @@ export class AdministrarEmpresaComponent implements OnInit {
     });
   }
 
+  titulo: String = '';
+  subtitulo: String = '';
+
   ngOnInit(): void {
     const { tipo, campo } = this.data;
-
+    this.titulo =
+      this.data.tipo == 'crear' ? 'Crear nueva empresa' : 'Editar empresa';
+    this.subtitulo =
+      this.data.tipo == 'crear'
+        ? 'Ingrese los datos para crear una nueva empresa'
+        : 'Ingrese los nuevos datos de la emmpresa';
     if (tipo == 'editar')
       this._empresasHttpService
         .obtenerEmpresaPorNit(campo!)
@@ -53,15 +61,32 @@ export class AdministrarEmpresaComponent implements OnInit {
       return;
     }
 
-    this._empresasHttpService.administrarEmpresa(value).subscribe((empresa) => {
-      this.router.navigate(['/lista-empresas']);
-      const tipoPopUp = this.data.tipo == 'crear' ? 'creada' : 'editada';
-      Swal.fire(
-        'Nueva empresa!',
-        `Empresa ${empresa.empresaNombre} ${tipoPopUp} con exito`,
-        'success'
-      );
-      this._dialogRef.close();
-    });
+    const { tipo, campo } = this.data;
+
+    if (tipo == 'crear') {
+      this._empresasHttpService.crearEmpresa(value).subscribe((empresa) => {
+        this.router.navigate(['/lista-empresas']);
+
+        Swal.fire(
+          'Nueva empresa!',
+          `Empresa ${empresa.empresaNombre} creada con exito`,
+          'success'
+        );
+        this._dialogRef.close();
+      });
+    } else {
+      this._empresasHttpService
+        .administrarEmpresa(value)
+        .subscribe((empresa) => {
+          this.router.navigate(['/lista-empresas']);
+
+          Swal.fire(
+            'Se actualizó la empresa!',
+            `Empresa ${empresa.empresaNombre} editada con exito`,
+            'success'
+          );
+          this._dialogRef.close();
+        });
+    }
   }
 }
