@@ -4,8 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    canLoad: [],
     loadChildren: () => import('./menu/menu.module').then((m) => m.MenuModule),
   },
+
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

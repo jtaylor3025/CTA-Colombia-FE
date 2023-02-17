@@ -7,6 +7,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { ArlHttpService } from '../sevices/http/arl-http.service';
 
 @Component({
   selector: 'app-administrar-arl',
@@ -16,8 +17,9 @@ import {
 export class AdministrarArlComponent implements OnInit {
   public readonly arlForm: FormGroup;
   constructor(
+    private _arlHttpService: ArlHttpService,
     formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: adminPopUp<string>
+    @Inject(MAT_DIALOG_DATA) public data: adminPopUp<number>
   ) {
     this.arlForm = formBuilder.group({
       arlId: ['', Validators.required],
@@ -29,5 +31,15 @@ export class AdministrarArlComponent implements OnInit {
   subtitulo: String = '';
   ngOnInit(): void {
     const { tipo, campo } = this.data;
+    this.titulo = this.data.tipo == 'crear' ? 'Crear nueva ARL' : 'Editar ARL';
+    this.subtitulo =
+      this.data.tipo == 'crear'
+        ? 'Ingrese los datos para crear una nueva ARL'
+        : 'Ingrese los nuevos datos de la ARL';
+
+    if (tipo == 'editar')
+      this._arlHttpService
+        .ObtenerArlPorId(campo!)
+        .subscribe((arl) => this.arlForm.setValue(arl));
   }
 }

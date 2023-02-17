@@ -18,4 +18,11 @@ export class ArlHttpService {
       .get<Pageable<Arl>>(`${environment.api}/arl/page`, { params })
       .pipe(tap(console.log));
   }
+
+  ObtenerArlPorId(arlId: number) {
+    const params = new HttpParams().append('arlId', arlId);
+    return this._http.get<Arl>(`${environment.api}/arl/id`, {
+      params,
+    });
+  }
 }

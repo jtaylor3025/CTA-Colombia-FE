@@ -62,31 +62,21 @@ export class AdministrarEmpresaComponent implements OnInit {
     }
 
     const { tipo, campo } = this.data;
+    let metodoEjecutar: keyof EmpresasHttpService =
+      tipo == 'crear' ? 'crearEmpresa' : 'administrarEmpresa';
 
-    if (tipo == 'crear') {
-      this._empresasHttpService.crearEmpresa(value).subscribe((empresa) => {
-        this.router.navigate(['/lista-empresas']);
+    this._empresasHttpService[metodoEjecutar](value).subscribe((mensaje) =>
+      this.mostrarMensajeEjecucion(tipo, mensaje)
+    );
+  }
 
-        Swal.fire(
-          'Nueva empresa!',
-          `Empresa ${empresa.empresaNombre} creada con exito`,
-          'success'
-        );
-        this._dialogRef.close();
-      });
-    } else {
-      this._empresasHttpService
-        .administrarEmpresa(value)
-        .subscribe((empresa) => {
-          this.router.navigate(['/lista-empresas']);
-
-          Swal.fire(
-            'Se actualizó la empresa!',
-            `Empresa ${empresa.empresaNombre} editada con exito`,
-            'success'
-          );
-          this._dialogRef.close();
-        });
-    }
+  private mostrarMensajeEjecucion(tipo: any, message: any) {
+    const tipoMensaje = tipo == 'crear' ? 'creada' : 'actualizada';
+    Swal.fire(
+      'Transaccion exitosa',
+      `La empresa ha sido ${tipoMensaje} con exito`,
+      'success'
+    );
+    this._dialogRef.close(true);
   }
 }

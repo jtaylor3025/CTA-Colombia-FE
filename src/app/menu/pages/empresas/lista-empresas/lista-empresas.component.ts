@@ -1,12 +1,18 @@
 import { Component, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { Pageable } from 'src/app/core/models/pageable.model';
 import { Empresa } from '../core/models/main.model';
 import { EmpresasHttpService } from '../services/http/empresas-http.service';
-import { merge, startWith, switchMap, map, takeUntil, Subject } from 'rxjs';
+import {
+  merge,
+  startWith,
+  switchMap,
+  map,
+  takeUntil,
+  Subject,
+  filter,
+} from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CrearEmpresaComponent } from '../crear-empresa/crear-empresa.component';
 import { AdministrarEmpresaComponent } from '../administrar-empresa/administrar-empresa.component';
 import { adminPopUpType } from '../core/types/main.type';
 
@@ -18,9 +24,9 @@ import { adminPopUpType } from '../core/types/main.type';
 export class ListaEmpresasComponent implements AfterViewInit, OnDestroy {
   private _clearSubscriptions$ = new Subject<void>();
 
-  @ViewChild(MatPaginator) private paginator!: MatPaginator;
+  private _reloadData = new Subject<void>();
 
-  // @ViewChild(MatSort) private sort!: MatSort;
+  @ViewChild(MatPaginator) private paginator!: MatPaginator;
 
   public columnas = ['nit', 'nombre', 'representante', 'edit'];
 
@@ -34,25 +40,16 @@ export class ListaEmpresasComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit(): void {
-    // this.sort.sortChange
-    //   .pipe(takeUntil(this._clearSubscriptions$))
-    //   .subscribe(() => (this.paginator.pageIndex = 0));
-    //this.sort.sortChange
-    merge(this.paginator.page)
+    merge(this.paginator.page, this._reloadData)
       .pipe(
         startWith({}),
         switchMap(() => {
-          // this.isLoadingResults = true;
           return this._empresaHttpService.obtenerListaEmpresas(
-            // this.sort.active,
-            // this.sort.direction,
             this.paginator.pageIndex,
             this.paginator.pageSize
           );
         }),
         map((data: Pageable<Empresa>) => {
-          // this.isLoadingResults = false;
-          // this.isRateLimitReached = data === null;
           if (data === null) {
             return [];
           }
@@ -69,8 +66,15 @@ export class ListaEmpresasComponent implements AfterViewInit, OnDestroy {
   }
 
   administrarEmpresa(tipo: adminPopUpType, empresaNit?: string) {
-    this._dialog.open(AdministrarEmpresaComponent, {
+    const modal = this._dialog.open(AdministrarEmpresaComponent, {
       data: { tipo, campo: empresaNit },
     });
+
+    modal
+      .afterClosed()
+      .pipe(filter((reload) => Boolean(reload)))
+      .subscribe((result) => {
+        this._reloadData.next();
+      });
   }
 }

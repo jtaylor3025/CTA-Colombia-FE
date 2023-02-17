@@ -28,7 +28,6 @@ import { MaterialAngularModule } from './material-angular.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
-    HttpClientModule,
     MaterialAngularModule,
   ],
   providers: [],

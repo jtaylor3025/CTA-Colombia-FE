@@ -4,15 +4,17 @@
     <mat-card-subtitle>Listado de ARL inscritas</mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions align="end">
-    <button mat-raised-button color="accent">Crear nueva ARL</button>
+    <button mat-raised-button color="accent" (click)="administrarArl('crear')">
+      Crear nueva ARL
+    </button>
   </mat-card-actions>
   <mat-card-content>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="arl">
-        <ng-container matColumnDef="id">
+        <ng-container matColumnDef="arlId">
           <th mat-header-cell *matHeaderCellDef>ARL ID</th>
           <td mat-cell [ngStyle]="{ width: '300px' }" *matCellDef="let arl">
-            {{ arl.id }}
+            {{ arl.arlId }}
           </td>
         </ng-container>
         <ng-container matColumnDef="nombre">
@@ -25,7 +27,11 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>Edit</th>
           <td mat-cell [ngStyle]="{ width: '200px' }" *matCellDef="let arl">
-            <button mat-mini-fab color="primary">
+            <button
+              (click)="administrarArl('editar', arl.arlId)"
+              mat-mini-fab
+              color="primary"
+            >
               <mat-icon>edit</mat-icon>
             </button>
           </td>
