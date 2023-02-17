@@ -25,4 +25,38 @@ export class ArlHttpService {
       params,
     });
   }
+
+  crearArl(arl: Arl): Observable<Arl> {
+    //arl.arlId = null;
+    return this._http.post(`${environment.api}/arl`, arl).pipe(
+      map((response: any) => response.arl as Arl),
+      catchError((e) => {
+        if (e.status) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+  administrarArl(arl: Arl): Observable<Arl> {
+    debugger;
+    return this._http.post(`${environment.api}/arl/actualizar`, arl).pipe(
+      map((response: any) => response.arl as Arl),
+      catchError((e) => {
+        if (e.status) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
 }

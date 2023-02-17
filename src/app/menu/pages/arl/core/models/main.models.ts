@@ -1,4 +1,4 @@
 export class Arl {
-  arlId!: number;
+  arlId!: number | null;
   arlNombre: string = '';
 }

@@ -4,20 +4,18 @@
     {{ subtitulo }}
   </mat-card-subtitle>
 
-  <form class="crear-arl" [formGroup]="arlForm">
+  <form class="crear-arl" [formGroup]="arlForm" (ngSubmit)="crearArl()">
     <section class="crear-empresa__campos">
       <mat-form-field appearance="fill">
         <mat-label>Identificador de ARL</mat-label>
         <input
           formControlName="arlId"
           matInput
+          [disabled]="true"
           placeholder="Identificador de ARL"
           type="number"
         />
         <mat-icon matSuffix>account_balance_wallet</mat-icon>
-        <mat-error *ngIf="arlForm.get('arlId')!.invalid">
-          Este campo no puede estar vacio
-        </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
