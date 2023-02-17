@@ -4,11 +4,15 @@ mat-sidenav-container{
 
 mat-sidenav,
 mat-sidenav-content {
-  padding: 10px;
+  padding: 8px;
+}
+
+.mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
 }
 
 mat-sidenav {
-  width: 200px;
+  width: 220px;
   background-image: radial-gradient(
       circle,
       rgba(242, 242, 242, 0.671) 35%,
