@@ -39,6 +39,10 @@ mat-list-item{
   border-radius: 10px;
 }
 
+.mat-list-item span {
+  font-size: 17px;
+}
+
 .item-menu-active{
   color: white;
   background: #bf0603 !important;

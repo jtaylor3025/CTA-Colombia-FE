@@ -10,25 +10,27 @@
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav mode="side" [(opened)]="opened">
-    <mat-expansion-panel
-      (opened)="panelOpenState = true"
-      (closed)="panelOpenState = false"
+  <mat-sidenav #drawer mode="side" [(opened)]="opened">
+    <mat-list-item
+      routerLinkActive="item-menu-active"
+      (click)="toggleSubmenu()"
     >
-      <mat-expansion-panel-header>
-        <mat-panel-title> Programas </mat-panel-title>
-      </mat-expansion-panel-header>
-      <mat-nav-list>
-        <mat-list-item>
-          <button mat-icon-button>
-            <mat-icon>security</mat-icon>
-          </button>
-          <span matListItemTitle> Programas </span>
-        </mat-list-item>
-      </mat-nav-list>
-    </mat-expansion-panel>
-
-    <mat-nav-list>
+      <button mat-icon-button>
+        <mat-icon mat-list-icon>keyboard_arrow_down</mat-icon>
+        <mat-icon>settings_applications</mat-icon>
+        <span matListItemTitle> Parametrización </span>
+      </button>
+    </mat-list-item>
+    <mat-nav-list *ngIf="showSubmenu">
+      <mat-list-item
+        routerLinkActive="item-menu-active"
+        routerLink="/arl/lista-arl"
+      >
+        <button mat-icon-button>
+          <mat-icon>security</mat-icon>
+        </button>
+        <span matListItemTitle> Arl </span>
+      </mat-list-item>
       <mat-list-item
         routerLinkActive="item-menu-active"
         routerLink="/empresas/lista-empresas"
@@ -38,7 +40,18 @@
         </button>
         <span matListItemTitle> Empresas </span>
       </mat-list-item>
-
+    </mat-nav-list>
+    <mat-list-item
+      routerLinkActive="item-menu-active"
+      (click)="toggleSubmenu2()"
+    >
+      <button mat-icon-button>
+        <mat-icon mat-list-icon>keyboard_arrow_down</mat-icon>
+        <mat-icon>settings_applications</mat-icon>
+        <span matListItemTitle> Parametrización </span>
+      </button>
+    </mat-list-item>
+    <mat-nav-list *ngIf="showSubmenu2">
       <mat-list-item
         routerLinkActive="item-menu-active"
         routerLink="/arl/lista-arl"
@@ -55,3 +68,26 @@
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<!--
+<mat-sidenav-container>
+  <mat-sidenav #drawer mode="side">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard">Dashboard</a>
+      <mat-list-item (click)="toggleSubmenu()">
+        <mat-icon mat-list-icon>menu</mat-icon>
+        <span mat-line>Submenu</span>
+        <mat-icon mat-list-icon>keyboard_arrow_down</mat-icon>
+      </mat-list-item>
+      <mat-nav-list *ngIf="showSubmenu">
+        <a mat-list-item routerLink="/submenu1">Submenu 1</a>
+        <a mat-list-item routerLink="/submenu2">Submenu 2</a>
+      </mat-nav-list>
+      <a mat-list-item routerLink="/settings">Settings</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-button (click)="drawer.toggle()">Toggle menu</button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+-->
