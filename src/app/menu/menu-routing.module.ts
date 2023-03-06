@@ -23,6 +23,20 @@ const routes: Routes = [
         (m) => m.EstudianteModule
       ),
   },
+  {
+    path: 'programa',
+    component: MenuComponent,
+    loadChildren: () =>
+      import('./pages/programa/programa.module').then((m) => m.ProgramaModule),
+  },
+  {
+    path: 'tipodocumento',
+    component: MenuComponent,
+    loadChildren: () =>
+      import('./pages/tipodocumento/tipodocumento.module').then(
+        (m) => m.TipodocumentoModule
+      ),
+  },
   { path: '', pathMatch: 'full', redirectTo: 'empresas' },
 ];
 

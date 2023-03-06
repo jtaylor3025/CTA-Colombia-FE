@@ -44,7 +44,10 @@
       </button>
     </mat-list-item>
     <mat-nav-list *ngIf="showSubmenu">
-      <mat-list-item routerLinkActive="item-menu-active" routerLink="">
+      <mat-list-item
+        routerLinkActive="item-menu-active"
+        routerLink="/tipodocumento/lista-tipodocumento"
+      >
         <button mat-icon-button>
           <mat-icon>assignment_ind</mat-icon>
         </button>
@@ -59,7 +62,10 @@
         </button>
         <span matListItemTitle> Estudiantes </span>
       </mat-list-item>
-      <mat-list-item routerLinkActive="item-menu-active" routerLink="">
+      <mat-list-item
+        routerLinkActive="item-menu-active"
+        routerLink="/programa/lista-programa"
+      >
         <button mat-icon-button>
           <mat-icon>class</mat-icon>
         </button>
