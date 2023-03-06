@@ -13,6 +13,28 @@
   <mat-sidenav #drawer mode="side" [(opened)]="opened">
     <mat-list-item
       routerLinkActive="item-menu-active"
+      (click)="toggleSubmenu2()"
+    >
+      <button mat-icon-button>
+        <mat-icon mat-list-icon>keyboard_arrow_down</mat-icon>
+        <mat-icon>developer_board</mat-icon>
+        <span matListItemTitle> Procesos </span>
+      </button>
+    </mat-list-item>
+    <mat-nav-list *ngIf="showSubmenu2">
+      <mat-list-item
+        routerLinkActive="item-menu-active"
+        routerLink="/arl/lista-arl"
+      >
+        <button mat-icon-button>
+          <mat-icon>security</mat-icon>
+        </button>
+        <span matListItemTitle> Arl </span>
+      </mat-list-item>
+    </mat-nav-list>
+
+    <mat-list-item
+      routerLinkActive="item-menu-active"
       (click)="toggleSubmenu()"
     >
       <button mat-icon-button>
@@ -22,6 +44,27 @@
       </button>
     </mat-list-item>
     <mat-nav-list *ngIf="showSubmenu">
+      <mat-list-item routerLinkActive="item-menu-active" routerLink="">
+        <button mat-icon-button>
+          <mat-icon>assignment_ind</mat-icon>
+        </button>
+        <span matListItemTitle> Tipo de documento </span>
+      </mat-list-item>
+      <mat-list-item
+        routerLinkActive="item-menu-active"
+        routerLink="/estudiante/lista-estudiante"
+      >
+        <button mat-icon-button>
+          <mat-icon>school</mat-icon>
+        </button>
+        <span matListItemTitle> Estudiantes </span>
+      </mat-list-item>
+      <mat-list-item routerLinkActive="item-menu-active" routerLink="">
+        <button mat-icon-button>
+          <mat-icon>class</mat-icon>
+        </button>
+        <span matListItemTitle> Programas de formación</span>
+      </mat-list-item>
       <mat-list-item
         routerLinkActive="item-menu-active"
         routerLink="/arl/lista-arl"
@@ -41,27 +84,7 @@
         <span matListItemTitle> Empresas </span>
       </mat-list-item>
     </mat-nav-list>
-    <mat-list-item
-      routerLinkActive="item-menu-active"
-      (click)="toggleSubmenu2()"
-    >
-      <button mat-icon-button>
-        <mat-icon mat-list-icon>keyboard_arrow_down</mat-icon>
-        <mat-icon>settings_applications</mat-icon>
-        <span matListItemTitle> Parametrización </span>
-      </button>
-    </mat-list-item>
-    <mat-nav-list *ngIf="showSubmenu2">
-      <mat-list-item
-        routerLinkActive="item-menu-active"
-        routerLink="/arl/lista-arl"
-      >
-        <button mat-icon-button>
-          <mat-icon>security</mat-icon>
-        </button>
-        <span matListItemTitle> Arl </span>
-      </mat-list-item>
-    </mat-nav-list>
+
     <mat-nav-list> </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

@@ -15,6 +15,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/arl/arl.module').then((m) => m.ArlModule),
   },
+  {
+    path: 'estudiante',
+    component: MenuComponent,
+    loadChildren: () =>
+      import('./pages/estudiante/estudiante.module').then(
+        (m) => m.EstudianteModule
+      ),
+  },
   { path: '', pathMatch: 'full', redirectTo: 'empresas' },
 ];
 
