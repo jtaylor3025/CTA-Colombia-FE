@@ -18,4 +18,43 @@ export class PaisHttpService {
       .get<Pageable<Pais>>(`${environment.api}/pais/page`, { params })
       .pipe(tap(console.log));
   }
+
+  ObtenerPaisPorId(paisId: number) {
+    const params = new HttpParams().append('paisId', paisId);
+    return this._http.get<Pais>(`${environment.api}/pais/id`, {
+      params,
+    });
+  }
+
+  crearPais(pais: Pais): Observable<Pais> {
+    return this._http.post(`${environment.api}/pais/create`, pais).pipe(
+      map((response: any) => response.pais as Pais),
+      catchError((e) => {
+        if (e.status) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+  editarPais(pais: Pais): Observable<Pais> {
+    return this._http.post(`${environment.api}/pais/update`, pais).pipe(
+      map((response: any) => response.pais as Pais),
+      catchError((e) => {
+        if (e.status) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
 }

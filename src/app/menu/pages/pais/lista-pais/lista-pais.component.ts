@@ -12,6 +12,9 @@ import {
   Subject,
   filter,
 } from 'rxjs';
+import { adminPopUpType } from 'src/app/menu/core/types/main.type';
+import { AdministrarPaisComponent } from '../administrar-pais/administrar-pais.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-lista-pais',
@@ -19,6 +22,8 @@ import {
   styleUrls: ['./lista-pais.component.scss'],
 })
 export class ListaPaisComponent {
+  private _clearSubscriptions$ = new Subject<void>();
+  private _reloadData = new Subject<void>();
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   public pais: Pais[] = [];
@@ -27,6 +32,7 @@ export class ListaPaisComponent {
 
   constructor(
     private readonly _paisHttpService: PaisHttpService,
+    private readonly _dialog: MatDialog,
     private paginator2: MatPaginatorIntl
   ) {
     paginator2.itemsPerPageLabel = 'Elementos por pagina';
@@ -49,9 +55,21 @@ export class ListaPaisComponent {
           }
           this.totalResultados = data.totalElements;
           return data.content;
-        })
-        //takeUntil(this._clearSubscriptions$)
+        }),
+        takeUntil(this._clearSubscriptions$)
       )
       .subscribe((data) => (this.pais = data));
+  }
+
+  administrarPais(tipo: adminPopUpType, paisId?: number) {
+    const modal = this._dialog.open(AdministrarPaisComponent, {
+      data: { tipo, campo: paisId },
+    });
+    modal
+      .afterClosed()
+      .pipe(filter((reload) => Boolean(reload)))
+      .subscribe((result) => {
+        this._reloadData.next();
+      });
   }
 }

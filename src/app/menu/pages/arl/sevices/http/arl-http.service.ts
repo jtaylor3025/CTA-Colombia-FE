@@ -27,7 +27,6 @@ export class ArlHttpService {
   }
 
   crearArl(arl: Arl): Observable<Arl> {
-    //arl.arlId = null;
     return this._http.post(`${environment.api}/arl`, arl).pipe(
       map((response: any) => response.arl as Arl),
       catchError((e) => {
@@ -44,7 +43,6 @@ export class ArlHttpService {
   }
 
   administrarArl(arl: Arl): Observable<Arl> {
-    debugger;
     return this._http.post(`${environment.api}/arl/actualizar`, arl).pipe(
       map((response: any) => response.arl as Arl),
       catchError((e) => {

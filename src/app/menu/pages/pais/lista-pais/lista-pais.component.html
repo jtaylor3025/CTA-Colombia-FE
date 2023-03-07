@@ -1,22 +1,24 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>PAIS</mat-card-title>
-    <mat-card-subtitle>Listado PAISES inscritos</mat-card-subtitle>
+    <mat-card-title>Países</mat-card-title>
+    <mat-card-subtitle>Listado de Países inscritos</mat-card-subtitle>
   </mat-card-header>
   <mat-card-actions align="end">
-    <button mat-raised-button color="accent">Crear nuevo PAIS</button>
+    <button mat-raised-button color="accent" (click)="administrarPais('crear')">
+      Crear nuevo País
+    </button>
   </mat-card-actions>
   <mat-card-content>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="pais">
         <ng-container matColumnDef="paisId">
-          <th mat-header-cell *matHeaderCellDef>Pais Id</th>
+          <th mat-header-cell *matHeaderCellDef>País Id</th>
           <td mat-cell [ngStyle]="{ width: '300px' }" *matCellDef="let pais">
             {{ pais.paisId }}
           </td>
         </ng-container>
         <ng-container matColumnDef="paisNombre">
-          <th mat-header-cell *matHeaderCellDef>Nombre del Pais</th>
+          <th mat-header-cell *matHeaderCellDef>Nombre del País</th>
           <td mat-cell [ngStyle]="{ width: '1000px' }" *matCellDef="let pais">
             {{ pais.paisNombre }}
           </td>
@@ -25,7 +27,11 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef>Edit</th>
           <td mat-cell [ngStyle]="{ width: '200px' }" *matCellDef="let pais">
-            <button mat-mini-fab color="primary">
+            <button
+              mat-mini-fab
+              color="primary"
+              (click)="administrarPais('editar', pais.paisId)"
+            >
               <mat-icon>edit</mat-icon>
             </button>
           </td>

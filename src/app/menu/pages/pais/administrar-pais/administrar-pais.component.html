@@ -1,1 +1,56 @@
-<p>administrar-pais works!</p>
+<mat-card>
+  <mat-card-title>{{ titulo }} </mat-card-title>
+  <mat-card-subtitle>
+    {{ subtitulo }}
+  </mat-card-subtitle>
+
+  <form class="crear-pais" [formGroup]="paisForm" (ngSubmit)="crearPais()">
+    <section class="crear-empresa__campos">
+      <mat-form-field appearance="fill">
+        <mat-label>Identificador de País</mat-label>
+        <input
+          formControlName="paisId"
+          matInput
+          [disabled]="true"
+          placeholder="Identificador de País"
+          type="number"
+        />
+        <mat-icon matSuffix>account_balance_wallet</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre del País</mat-label>
+        <input
+          formControlName="paisNombre"
+          matInput
+          placeholder="Ingrese Nombre del País"
+          type="text"
+        />
+        <mat-icon matSuffix>account_balance</mat-icon>
+        <mat-error *ngIf="paisForm.get('paisNombre')!.invalid">
+          Este campo no puede estar vacio
+        </mat-error>
+      </mat-form-field>
+    </section>
+
+    <mat-card-actions align="end">
+      <button
+        type="submit"
+        mat-raised-button
+        [disabled]="paisForm.invalid"
+        color="primary"
+      >
+        {{ this.data.tipo == "crear" ? "GUARDAR" : "ACTUALIZAR" }}
+      </button>
+      <button
+        mat-dialog-close
+        type="button"
+        mat-raised-button
+        mat-button
+        color="accent"
+      >
+        CANCELAR
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
