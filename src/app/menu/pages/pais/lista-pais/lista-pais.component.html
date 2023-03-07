@@ -1,1 +1,46 @@
-<p>lista-pais works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>PAIS</mat-card-title>
+    <mat-card-subtitle>Listado PAISES inscritos</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="accent">Crear nuevo PAIS</button>
+  </mat-card-actions>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="pais">
+        <ng-container matColumnDef="paisId">
+          <th mat-header-cell *matHeaderCellDef>Pais Id</th>
+          <td mat-cell [ngStyle]="{ width: '300px' }" *matCellDef="let pais">
+            {{ pais.paisId }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="paisNombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre del Pais</th>
+          <td mat-cell [ngStyle]="{ width: '1000px' }" *matCellDef="let pais">
+            {{ pais.paisNombre }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>Edit</th>
+          <td mat-cell [ngStyle]="{ width: '200px' }" *matCellDef="let pais">
+            <button mat-mini-fab color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+      </table>
+
+      <mat-paginator
+        [length]="totalResultados"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

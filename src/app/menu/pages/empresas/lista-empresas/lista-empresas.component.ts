@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { Pageable } from 'src/app/core/models/pageable.model';
 import { Empresa } from '../core/models/main.model';
 import { EmpresasHttpService } from '../services/http/empresas-http.service';
@@ -36,8 +36,11 @@ export class ListaEmpresasComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly _empresaHttpService: EmpresasHttpService,
-    private readonly _dialog: MatDialog
-  ) {}
+    private readonly _dialog: MatDialog,
+    private paginator2: MatPaginatorIntl
+  ) {
+    paginator2.itemsPerPageLabel = 'Elementos por pagina';
+  }
 
   ngAfterViewInit(): void {
     merge(this.paginator.page, this._reloadData)

@@ -37,6 +37,12 @@ const routes: Routes = [
         (m) => m.TipodocumentoModule
       ),
   },
+  {
+    path: 'pais',
+    component: MenuComponent,
+    loadChildren: () =>
+      import('./pages/pais/pais.module').then((m) => m.PaisModule),
+  },
   { path: '', pathMatch: 'full', redirectTo: 'empresas' },
 ];
 

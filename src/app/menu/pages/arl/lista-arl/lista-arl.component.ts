@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Arl } from '../core/models/main.models';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { Pageable } from 'src/app/core/models/pageable.model';
 import { ArlHttpService } from '../sevices/http/arl-http.service';
 import {
@@ -32,8 +32,11 @@ export class ListaArlComponent {
 
   constructor(
     private readonly _arlHttpService: ArlHttpService,
-    private readonly _dialog: MatDialog
-  ) {}
+    private readonly _dialog: MatDialog,
+    private paginator2: MatPaginatorIntl
+  ) {
+    paginator2.itemsPerPageLabel = 'Elementos por pagina';
+  }
 
   ngAfterViewInit(): void {
     merge(this.paginator.page)
