@@ -1,1 +1,74 @@
-<p>lista-tipodocumento works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Tipos de Documentos</mat-card-title>
+    <mat-card-subtitle
+      >Listado de Tipos de Documentos inscritos</mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-actions align="end">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="administrarTipoDocumento('crear')"
+    >
+      Crear nuevo Tipo de Documento
+    </button>
+  </mat-card-actions>
+  <mat-card-content>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="tipodocumento">
+        <ng-container matColumnDef="tipodocuId">
+          <th mat-header-cell *matHeaderCellDef>identificador único</th>
+          <td
+            mat-cell
+            [ngStyle]="{ width: '300px' }"
+            *matCellDef="let tipodocumento"
+          >
+            {{ tipodocumento.tipodocuId }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="tipodocuNombre">
+          <th mat-header-cell *matHeaderCellDef>
+            Nombre del Tipo de Documento
+          </th>
+          <td
+            mat-cell
+            [ngStyle]="{ width: '1000px' }"
+            *matCellDef="let tipodocumento"
+          >
+            {{ tipodocumento.tipodocuNombre }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>Edit</th>
+          <td
+            mat-cell
+            [ngStyle]="{ width: '200px' }"
+            *matCellDef="let tipodocumento"
+          >
+            <button
+              mat-mini-fab
+              color="primary"
+              (click)="
+                administrarTipoDocumento('editar', tipodocumento.tipodocuId)
+              "
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+      </table>
+
+      <mat-paginator
+        [length]="totalResultados"
+        [pageSizeOptions]="[5, 10, 25, 100]"
+        showFirstLastButtons
+      >
+      </mat-paginator>
+    </div>
+  </mat-card-content>
+</mat-card>

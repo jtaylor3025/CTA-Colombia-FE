@@ -1,1 +1,60 @@
-<p>administrar-tipodocumento works!</p>
+<mat-card>
+  <mat-card-title>{{ titulo }} </mat-card-title>
+  <mat-card-subtitle>
+    {{ subtitulo }}
+  </mat-card-subtitle>
+
+  <form
+    class="crear-pais"
+    [formGroup]="tipodocuForm"
+    (ngSubmit)="crearTipoDocumento()"
+  >
+    <section class="crear-empresa__campos">
+      <mat-form-field appearance="fill">
+        <mat-label>Identificador de Tipo de Documento</mat-label>
+        <input
+          formControlName="tipodocuId"
+          matInput
+          [disabled]="true"
+          placeholder="Identificador de Tipo de Documento"
+          type="number"
+        />
+        <mat-icon matSuffix>account_balance_wallet</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre del Tipo del Documento</mat-label>
+        <input
+          formControlName="tipodocuNombre"
+          matInput
+          placeholder="Ingrese Nombre del Tipo del Documento"
+          type="text"
+        />
+        <mat-icon matSuffix>account_balance</mat-icon>
+        <mat-error *ngIf="tipodocuForm.get('tipodocuNombre')!.invalid">
+          Este campo no puede estar vacio
+        </mat-error>
+      </mat-form-field>
+    </section>
+
+    <mat-card-actions align="end">
+      <button
+        type="submit"
+        mat-raised-button
+        [disabled]="tipodocuForm.invalid"
+        color="primary"
+      >
+        {{ this.data.tipo == "crear" ? "GUARDAR" : "ACTUALIZAR" }}
+      </button>
+      <button
+        mat-dialog-close
+        type="button"
+        mat-raised-button
+        mat-button
+        color="accent"
+      >
+        CANCELAR
+      </button>
+    </mat-card-actions>
+  </form>
+</mat-card>
